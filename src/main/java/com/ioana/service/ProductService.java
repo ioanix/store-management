@@ -9,4 +9,8 @@ public interface ProductService {
     List<Product> getAll();
 
     Product addProduct(Product product);
+
+    Product getProduct(Long id);
+
+    Product changePriceForProduct(Long id, float newPrice);
 }
