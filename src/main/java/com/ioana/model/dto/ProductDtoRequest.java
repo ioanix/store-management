@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class ProductDto {
+public class ProductDtoRequest {
 
     private String name;
     private float price;

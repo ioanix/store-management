@@ -1,7 +1,10 @@
 package com.ioana.controller;
 
 
+import com.ioana.mapper.Mapper;
 import com.ioana.model.Product;
+import com.ioana.model.dto.ProductDtoRequest;
+import com.ioana.model.dto.ProductDtoResponse;
 import com.ioana.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,21 +16,25 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final Mapper<Product, ProductDtoRequest> productMapper;
+    private final Mapper<Product, ProductDtoResponse> productResponseMapper;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, Mapper<Product, ProductDtoRequest> productMapper, Mapper<Product, ProductDtoResponse> productResponseMapper) {
         this.productService = productService;
+        this.productMapper = productMapper;
+        this.productResponseMapper = productResponseMapper;
     }
 
     @GetMapping("/products")
-    public ResponseEntity<List<Product>> getAllProducts() {
+    public ResponseEntity<List<ProductDtoResponse>> getAllProducts() {
 
-        return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(productResponseMapper.convertModelsToDtos(productService.getAll()), HttpStatus.OK);
     }
 
     @PostMapping("/add/product")
-    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> addProduct(@RequestBody ProductDtoRequest productDtoRequest) {
 
-        return new ResponseEntity<>(productService.addProduct(product), HttpStatus.CREATED);
+        return new ResponseEntity<>(productService.addProduct(productMapper.convertDtoToModel(productDtoRequest)), HttpStatus.CREATED);
     }
 
     @GetMapping("/product/{id}")
