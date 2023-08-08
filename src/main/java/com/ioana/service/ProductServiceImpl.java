@@ -3,19 +3,17 @@ package com.ioana.service;
 import com.ioana.exception.ItemNotFoundException;
 import com.ioana.model.Product;
 import com.ioana.repository.ProductRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-
-    public ProductServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 
     @Override
     public List<Product> getAll() {
