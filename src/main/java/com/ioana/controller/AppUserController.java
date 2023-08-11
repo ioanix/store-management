@@ -29,7 +29,6 @@ public class AppUserController {
 
     @PostMapping(path = "/users/register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody AppUserDto appUserDto) {
-
         log.info("appUserDto = {}", appUserDto);
 
         return ResponseEntity.ok(appUserService.addUser(appUserMapper.convertDtoToModel(appUserDto)));
@@ -37,13 +36,13 @@ public class AppUserController {
 
     @PostMapping("/users/login")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest authenticationRequest) {
+        log.info("request = {}", authenticationRequest);
 
         return ResponseEntity.ok(appUserService.authenticate(authenticationRequest));
     }
 
     @GetMapping("/users")
     public ResponseEntity<List<AppUserDto>> showAllUsers() {
-
         log.info("appUserList = {}", appUserService.getAll());
 
         return new ResponseEntity<>(appUserMapper.convertModelsToDtos(appUserService.getAll()), HttpStatus.OK);

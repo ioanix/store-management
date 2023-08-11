@@ -64,7 +64,7 @@ class ProductServiceImplTest {
     }
 
     @Test
-    void shouldGetAProjectById() {
+    void shouldGetAProducttById() {
         when(productRepository.findById(PRODUCT_ID)).thenReturn(Optional.of(product));
 
         assertThat(underTest.getProduct(PRODUCT_ID)).isEqualTo(product);
@@ -80,7 +80,7 @@ class ProductServiceImplTest {
     }
 
     @Test
-    void shouldChangePriceForProject() {
+    void shouldChangePriceForProduct() {
         when(productRepository.findById(PRODUCT_ID)).thenReturn(Optional.of(product));
 
         underTest.changePriceForProduct(PRODUCT_ID, NEW_PRICE);

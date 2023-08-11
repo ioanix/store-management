@@ -25,7 +25,6 @@ public class SecurityUser implements UserDetails {
         this.appUser = appUser;
     }
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(appUser.getRole().name()));

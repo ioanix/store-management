@@ -36,12 +36,8 @@ public class JwtService {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", userDetails.getAuthorities());
 
-        return generateToken(claims, userDetails);
-    }
-
-    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         return Jwts.builder()
-                .setClaims(extraClaims)
+                .setClaims(claims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new java.util.Date())
                 .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(EXPIRATION_TIME)))
