@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,7 +13,7 @@ import java.util.Date;
 @Setter
 public class ProductDtoResponse {
 
-    private Date dateAdded;
+    private LocalDateTime dateAdded;
     private LocalDateTime lastModified;
     private String name;
     private float price;

@@ -5,10 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.SequenceGenerator;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @MappedSuperclass
 @NoArgsConstructor
@@ -30,14 +36,14 @@ public class BaseEntity<ID extends Serializable> implements Serializable {
     private ID id;
 
     @Column(name = "date_added")
-    protected Date dateAdded;
+    protected LocalDateTime dateAdded;
 
     @Column(name = "last_modified")
     protected LocalDateTime lastModified;
 
     @PrePersist
     private void onCreate() {
-        dateAdded = new Date();
+        dateAdded = LocalDateTime.now();
         lastModified = LocalDateTime.now();
     }
 
